@@ -15,7 +15,7 @@ class TodoList extends Component {
             this.props.todos.map((item, index) => {
                 return (
                     <li className="collection-item" key={index}>
-                    <Link style={{color: this.props.todos[index].complete ? 'red' : 'green'}} to={`/item/${item._id}`} >{item.title}</Link>
+                    <Link style={{color: this.props.todos[index].complete ? 'green' : 'red'}} to={`/item/${item._id}`} >{item.title}</Link>
                     </li>
                 )
             })

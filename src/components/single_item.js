@@ -47,27 +47,32 @@ class SingleItem extends Component {
             return <div>Loading...</div>
         }
 
+
         return(
             <div className="collection with-header" >
                 <div className="right-align">
-                    <Link className="btn red darken-2" to="/">Go Back</Link>
+                    <Link className="btn purple darken-2" to="/">Go Back</Link>
                 </div>
-                <h3 className="collapsible-header" >{this.props.single.title}</h3>
+                <h3 className="collapsible-header" >{single.title}</h3>
                 <p className="collection-item">{single.details}</p>
                 <p className="collection-item">Created By: {single.userId}</p>
                 <p className="collection-item">Time Created: {this.timeCreated()}</p>
                 <p className="collection-item">Status: {single.complete ? 'Item Complete' : 'Item Incomplete'} </p>
                 <p className="collection-item">Time Completed: {this.timeCompleted()}</p>
-                <button onClick={() => this.toggleComplete()} className={`btn ${single.complete ? 'red' : 'green'}`} >{single.complete ? 'Restore' : 'Complete'}</button>
+                <button onClick={() => this.toggleComplete()} className={`btn ${single.complete ? 'blue' : 'green'}`} >{single.complete ? 'Restore' : 'Complete'}</button>
                 <button style={{margin: '8px'}} onClick={() => this.delete()} className="btn red darken-4">Delete</button>
+                <button className="collection-item btn yellow darken-4">
+                    <Link  style={{color: 'white'}} to={`/edit-item/${this.props.single._id}`}>Edit Item</Link>
+                </button>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
+    console.log('State', state);
     return {
-        single: state.todo.single
+        single: state.todo.single,
     }
 }
 
