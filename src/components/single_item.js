@@ -14,14 +14,29 @@ class SingleItem extends Component {
     }
 
     delete(){
-        this.props.deleteItem(this.props.single._id);
+        this.props.deleteItem(this.props.single._id).then(()=> {
+            this.props.history.push('/')
+        });
     }
 
     timeCreated(){
-        console.log('Time created', this.props.single.created);
         let timeStamp = parseInt(this.props.single.created);
         let time = new Date(timeStamp);
         return time.toLocaleString()
+    }
+
+    timeCompleted(){
+        console.log('Time completed', this.props.single.completed);
+        let timeStamp = parseInt(this.props.single.completed);
+        let time = new Date(timeStamp);
+        let resultingTime = time.toLocaleString();
+        if (resultingTime === "Invalid Date"){
+            let resultingTime = " ";
+            return resultingTime
+        }
+        else {
+            return resultingTime
+        }
     }
 
     render() {
@@ -38,12 +53,13 @@ class SingleItem extends Component {
                     <Link className="btn red darken-2" to="/">Go Back</Link>
                 </div>
                 <h3 className="collapsible-header" >{this.props.single.title}</h3>
-                <p className="collection-item" >{single.details}</p>
-                <p className="collection-item" >Created By: {single.userId}</p>
+                <p className="collection-item">{single.details}</p>
+                <p className="collection-item">Created By: {single.userId}</p>
                 <p className="collection-item">Time Created: {this.timeCreated()}</p>
-                <p className="collection-item" >Status: {single.complete ? 'Item Complete' : 'Item Incomplete'}</p>
+                <p className="collection-item">Status: {single.complete ? 'Item Complete' : 'Item Incomplete'} </p>
+                <p className="collection-item">Time Completed: {this.timeCompleted()}</p>
                 <button onClick={() => this.toggleComplete()} className={`btn ${single.complete ? 'red' : 'green'}`} >{single.complete ? 'Restore' : 'Complete'}</button>
-                <button style={{margin: '8px'}} onClick={() => this.delete()} className="btn red darken-4" >Delete</button>
+                <button style={{margin: '8px'}} onClick={() => this.delete()} className="btn red darken-4">Delete</button>
             </div>
         )
     }
