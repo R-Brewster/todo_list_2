@@ -39,6 +39,7 @@ class AddItem extends Component {
                         <button style={{marginLeft: '8px'}} className="btn yellow darken-4" onClick={reset} type="button">Reset</button>
                     </div>
                 </form>
+
             </div>
         )
 
